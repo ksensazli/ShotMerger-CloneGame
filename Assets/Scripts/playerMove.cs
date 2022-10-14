@@ -70,4 +70,14 @@ public class playerMove : MonoBehaviour
 
         _rigidBody.MovePosition(targetPositionLerp);
     }
+
+    private void onCollisionEnter(Collision collisionInfo)
+    {
+        if(collisionInfo.collider.tag == "Obstacle")
+        {
+            Vector3 obstacleForce = new Vector3(0,0,-10);
+            _rigidBody.AddForce(obstacleForce);
+            DOVirtual.DelayedCall(1f, ()=>_rigidBody.velocity = Vector3.zero);
+        }
+    }
 }
